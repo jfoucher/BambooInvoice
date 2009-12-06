@@ -203,6 +203,11 @@ class Invoices extends MY_Controller {
 		}
 		else
 		{
+			$recur_interval = $this->input->post('recur_interval');
+			$recur_timeframe = $this->input->post('recur_timeframe');
+			if ($recur_timeframe=='years') $recur_interval=$recur_interval*365;
+			if ($recur_timeframe=='months') $recur_interval=$recur_interval*30;
+			
 			$invoice_data = array(
 									'client_id' => $this->input->post('client_id'),
 									'invoice_number' => $this->input->post('invoice_number'),
@@ -211,7 +216,8 @@ class Invoices extends MY_Controller {
 									'tax1_rate' => $this->input->post('tax1_rate'),
 									'tax2_desc' => $this->input->post('tax2_description'),
 									'tax2_rate' => $this->input->post('tax2_rate'),
-									'invoice_note' => $this->input->post('invoice_note')
+									'invoice_note' => $this->input->post('invoice_note'),
+									'recur_interval' => $recur_interval
 								);
 
 			$invoice_id = $this->invoices_model->addInvoice($invoice_data);
@@ -282,6 +288,7 @@ class Invoices extends MY_Controller {
 		$data['row'] = $invoiceInfo->row();
 
 		$data['date_invoice_issued'] = formatted_invoice_date($data['row']->dateIssued);
+		$data['raw_date_invoice_issued'] = $data['row']->dateIssued;
 		$data['date_invoice_due'] = formatted_invoice_date($data['row']->dateIssued, $this->settings_model->get_setting('days_payment_due'));
 
 		if ($data['row']->amount_paid >= $data['row']->total_with_tax)
@@ -328,8 +335,9 @@ class Invoices extends MY_Controller {
 		$data['paymentHistory'] = $this->invoices_model->getInvoicePaymentHistory($id);
 		$data['invoiceOptions'] = TRUE; // create invoice options on sidebar
 		$data['company_logo'] = $this->_get_logo();
-		$data['page_title'] = 'Invoice Details';
-
+		if (!isset($data['row']->type)) $data['row']->type="invoice";
+		$data['page_title'] =$this->lang->line('invoice_'.$data['row']->type.'_details');
+//echo 'invoice_'.$data['row']->type.'_details';
 		$this->load->view('invoices/view', $data);
 	}
 
@@ -366,7 +374,7 @@ class Invoices extends MY_Controller {
 
 		$this->_validation_edit(); // Load the validation rules and fields
 
-		$data['page_title'] = $this->lang->line('menu_edit_invoice');
+		$data['page_title'] = $this->lang->line('menu_edit_'.$data['row']->type);
 		$data['button_label'] = 'invoice_save_edited_invoice';
 
 		if ($this->validation->run() == FALSE)
@@ -393,7 +401,9 @@ class Invoices extends MY_Controller {
 											'tax1_rate' 		=> $this->input->post('tax1_rate'),
 											'tax2_desc' 		=> $this->input->post('tax2_description'),
 											'tax2_rate' 		=> $this->input->post('tax2_rate'),
-											'invoice_note' 		=> $this->input->post('invoice_note')
+											'invoice_note' 		=> $this->input->post('invoice_note'),
+											'recur_interval' 	=> $this->input->post('recur_interval'),
+											'type' 	=> $this->input->post('type')
 									);
 
 				$invoice_id = $this->invoices_model->updateInvoice($this->input->post('id'), $invoice_data);
@@ -506,7 +516,10 @@ class Invoices extends MY_Controller {
 										'tax1_rate' => $this->input->post('tax1_rate'),
 										'tax2_desc' => $this->input->post('tax2_description'),
 										'tax2_rate' => $this->input->post('tax2_rate'),
-										'invoice_note' => $this->input->post('invoice_note')
+										'invoice_note' => $this->input->post('invoice_note'),
+										'recur_interval' => $this->input->post('recur_interval'),
+										'type' => $this->input->post('type')
+
 									);
 
 				$invoice_id = $this->invoices_model->addInvoice($invoice_data);
@@ -577,6 +590,7 @@ class Invoices extends MY_Controller {
 		$this->load->model('clientcontacts_model');
 		$this->load->model('invoice_histories_model', '', TRUE);
 		$data['page_title'] = 'invoice';
+		$data['id'] = $id;
 
 		// configure email to be sent
 		$data['companyInfo'] = $this->settings_model->getCompanyInfo()->row();
@@ -668,7 +682,7 @@ class Invoices extends MY_Controller {
 		{
 			$this->email->bcc($data['companyInfo']->primary_contact_email);
 		}
-
+		
 		$email_body = $this->input->post('email_body');
 
 		$this->email->from($data['companyInfo']->primary_contact_email, $data['companyInfo']->primary_contact);
@@ -714,18 +728,21 @@ class Invoices extends MY_Controller {
 
 	function pdf($id, $output = TRUE)
 	{
+		
 		$this->lang->load('date');
 		$this->load->plugin('to_pdf');
 		$this->load->helper('file');
+		
+		$data['id'] = $id;
 
-		$data['page_title'] = $this->lang->line('menu_invoices');
+		
 
 		$invoiceInfo = $this->invoices_model->getSingleInvoice($id);
 
 		if ($invoiceInfo->num_rows() == 0) {redirect('invoices/');}
 
 		$data['row'] = $invoiceInfo->row();
-
+		$data['page_title'] = $this->lang->line('menu_invoices');
 		$data['client_note'] = $this->clients_model->get_client_info($data['row']->client_id)->client_notes;
 
 		$data['date_invoice_issued'] = formatted_invoice_date($data['row']->dateIssued);
@@ -737,25 +754,30 @@ class Invoices extends MY_Controller {
 		$data['items'] = $this->invoices_model->getInvoiceItems($id);
 
 		$data['total_no_tax'] = $this->lang->line('invoice_amount').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_notax, 2, $this->config->item('currency_decimal'), '')."<br />\n";
-
+$data['no_tax_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_notax, 2, $this->config->item('currency_decimal'), '');
 		// taxes
 		$data['tax_info'] = $this->_tax_info($data['row']);
-
+		$data['tax_data']=$this->_tax_value($data['row']);
 		$data['total_with_tax'] = $this->lang->line('invoice_total').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax, 2, $this->config->item('currency_decimal'), '')."<br />\n";;
-
+$data['with_tax_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax, 2, $this->config->item('currency_decimal'), '');
 		if ($data['row']->amount_paid > 0)
 		{
 			$data['total_paid'] = $this->lang->line('invoice_amount_paid').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '')."<br />\n";;
+			$data['paid_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
 			$data['total_outstanding'] = $this->lang->line('invoice_amount_outstanding').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax - $data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
+			$data['outstanding_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax - $data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
 		}
 		else
 		{
 			$data['total_paid'] = '';
 			$data['total_outstanding'] = '';
+			$data['outstanding_amount']='';
+			$data['paid_amount']='';
 		}
 
 		$html = $this->load->view('invoices/pdf', $data, TRUE);
 		$invoice_localized = url_title(strtolower($this->lang->line('invoice_invoice')));
+		//echo $html;
 
 		if (pdf_create($html, $invoice_localized.'_'.$data['row']->invoice_number, $output))
 		{
@@ -963,13 +985,31 @@ class Invoices extends MY_Controller {
 
 		return $tax_info;
 	}
+	function _tax_value($data)
+	{
+		$tax_info = array();
+
+		if ($data->total_tax1 != 0)
+		{
+			$tax_info[0]['data'] = $data->tax1_desc." (".$data->tax1_rate."%)";
+			$tax_info[0]['value'] = $this->settings_model->get_setting('currency_symbol').number_format($data->total_tax1, 2, $this->config->item('currency_decimal'), '');
+		}
+
+		if ($data->total_tax2 != 0)
+		{
+			$tax_info[1]['data'] = $data->tax2_desc." (".$data->tax2_rate."%)";
+			$tax_info[1]['value'] = $this->settings_model->get_setting('currency_symbol').number_format($data->total_tax2, 2, $this->config->item('currency_decimal'), '');
+		}
+
+		return $tax_info;
+	}
 
 	// --------------------------------------------------------------------
 
 	function _validation()
 	{
 		$rules['client_id'] 		= 'required|numeric';
-		$rules['invoice_number'] 	= 'trim|required|htmlspecialchars|max_length[12]|alpha_dash|callback_uniqueInvoice';
+		$rules['invoice_number'] 	= 'trim|required|htmlspecialchars|max_length[255]|alpha_dash|callback_uniqueInvoice';
 		$rules['dateIssued'] 		= 'trim|htmlspecialchars|callback_dateIssued';
 		$rules['invoice_note'] 		= 'trim|htmlspecialchars|max_length[2000]';
 		$rules['tax1_description'] 	= 'trim|htmlspecialchars|max_length[50]';

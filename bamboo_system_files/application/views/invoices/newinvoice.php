@@ -74,12 +74,19 @@ rest of the itemized items. -->
 	<p class="error"><?php echo $this->lang->line('invoice_tax_exempt');?></p>
 <?php endif;?>
 </div>
-
+	<p><label><input type="radio" name="type" value="estimate" /><span><?php echo $this->lang->line('invoice_estimate');?></span></label><br />
+	<label><input type="radio" name="type" value="invoice" /><span><?php echo $this->lang->line('invoice_invoice');?></span></label></p>
+	
 	<p>
 	<label><?php echo $this->lang->line('invoice_note');?> <?php echo $this->validation->invoice_note_error; ?><br />
 	<textarea name="invoice_note" id="invoice_note" cols="80" rows="3"><?php echo ($this->validation->invoice_note) ? ($this->validation->invoice_note) : ($invoice_note_default);?></textarea>
 	</label>
 	</p>
+
+	<p><label>Recur in <input type="text" name="recur_interval" size="2" maxlength="11"></label><select name="recur_timeframe"><option value="days"><?php echo $this->lang->line('days');?></option>
+	<option value="months"><?php echo $this->lang->line('months');?></option>
+	<option value="years"><?php echo $this->lang->line('years');?></option>
+	</select> (leave blank to disable)</p>
 	<p>
 	<input type="submit" name="createInvoice" id="createInvoice" value="<?php echo $this->lang->line('actions_create_invoice');?>" />
 	</p>

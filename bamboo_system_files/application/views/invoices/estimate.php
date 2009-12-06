@@ -1,5 +1,6 @@
 <?php
-$this->load->view('header');
+$this->load->view('header');
+
 if ($message != ''):
 ?>
 <p class="error"><?php echo $message;?></p>
@@ -103,7 +104,8 @@ if ($row->amount_paid < $row->total_with_tax):
 				</p>
 
 			</div>
-			<?php endif; ?>
+			<?php endif; ?>
+
 	<?php echo form_close();?>
 
 <div class="invoiceViewHold">
@@ -111,17 +113,17 @@ if ($row->amount_paid < $row->total_with_tax):
 		<h2>
 			<?php if (isset($company_logo)) {echo $company_logo.'<br />';}?>
 			<?php echo $companyInfo->company_name;?> 
+			<span><?php echo $this->lang->line('invoice_estimate');?></span>
 		</h2>
 
 		<p>
 			<?php if ($companyInfo->address1 != '') {echo $companyInfo->address1;}?>
 			<?php if ($companyInfo->address2 != '') {echo ', ' . $companyInfo->address2;}?>
 			<?php if ($companyInfo->address1 != '' || $companyInfo->address2 != '') {echo '<br />';}?>
-			<?php if ($companyInfo->postal_code != '') {echo ' ' . $companyInfo->postal_code;}?>
 			<?php if ($companyInfo->city != '') {echo $companyInfo->city;}?>
-			<?php if ($companyInfo->province != '') {echo ', ' . $companyInfo->province;}?><br />
-			<?php if ($companyInfo->country != '') {echo $companyInfo->country;}?>
-			
+			<?php if ($companyInfo->province != '') {echo ', ' . $companyInfo->province;}?>
+			<?php if ($companyInfo->country != '') {echo ', ' . $companyInfo->country;}?>
+			<?php if ($companyInfo->postal_code != '') {echo ' ' . $companyInfo->postal_code;}?>
 			<?php if ($companyInfo->city != '' || $companyInfo->province != '' || $companyInfo->country != '' || $companyInfo->postal_code != '') {echo '<br />';}?>
 			<?php echo auto_link(prep_url($companyInfo->website));?>
 		</p>
@@ -130,7 +132,7 @@ if ($row->amount_paid < $row->total_with_tax):
 
 	<p>
 		<strong>
-			<?php echo $this->lang->line('invoice_'.$row->type);?> <?php echo $row->invoice_number;?><br />
+			<?php echo $this->lang->line('invoice_estimate');?> <?php echo $row->invoice_number;?><br />
 			<?php echo $date_invoice_issued;?>
 		</strong>
 	</p>
@@ -145,11 +147,10 @@ if ($row->amount_paid < $row->total_with_tax):
 		<?php if ($row->address1 != '') {echo $row->address1;}?>
 		<?php if ($row->address2 != '') {echo ', ' . $row->address2;}?>
 		<?php if ($row->address1 != '' || $row->address2 != '') {echo '<br />';}?>
-		<?php if ($row->postal_code != '') {echo ' ' . $row->postal_code;}?>
 		<?php if ($row->city != '') {echo $row->city;}?>
 		<?php if ($row->province != '') {if ($row->city != '') {echo ', ';} echo $row->province;}?>
 		<?php if ($row->country != '') {if ($row->province != '' || ($row->province == '' && $row->city != '')){echo ', ';} echo $row->country;}?>
-		
+		<?php if ($row->postal_code != '') {echo ' ' . $row->postal_code;}?>
 		<?php if ($row->city != '' || $row->province != '' || $row->country != '' || $row->postal_code != '') {echo '<br />';}?>
 		<?php echo auto_link(prep_url($row->website));?>
 		<?php if ($row->tax_code != '') {echo '<br />'.$this->lang->line('settings_tax_code').': '.$row->tax_code;}?>
@@ -164,7 +165,7 @@ if ($row->amount_paid < $row->total_with_tax):
 		</tr>
 		<?php foreach ($items->result() as $item):?>
 		<tr>
-			<td><p><?php echo str_replace('.00', '', $item->quantity);?><?=($item->quantity==1) ? '' : ' h'?></p></td>
+			<td><p><?php echo str_replace('.00', '', $item->quantity);?></p></td>
 			<td><?php echo auto_typography($item->work_description);?></td>
 			<td><p><?php echo $this->settings_model->get_setting('currency_symbol') . str_replace('.', $this->config->item('currency_decimal'), $item->amount);?> <?php if ($item->taxable == 0){echo '(' . $this->lang->line('invoice_not_taxable') . ')';}?></p></td>
 			<td><p><?php echo $this->settings_model->get_setting('currency_symbol') . number_format($item->quantity * $item->amount, 2, $this->config->item('currency_decimal'), '');?></p></td>
