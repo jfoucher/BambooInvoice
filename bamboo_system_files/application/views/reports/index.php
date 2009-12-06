@@ -2,6 +2,7 @@
 $this->load->view('header');
 $tax1 = 0;
 $tax2 = 0;
+//testing
 ?>
 <h2><?php echo $this->lang->line('bambooinvoice_logo');?> <?php echo $page_title;?></h2>
 
