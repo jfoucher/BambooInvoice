@@ -232,7 +232,7 @@ td.lastRow{
 				</p>
 				<p class="fecha"><?php echo $this->lang->line('invoice_date_issued')?>  <span> <?php echo $date_invoice_issued;?></span>
 				</p>
-				<p class="fecha"><?php echo $this->lang->line('invoice_date_due')?> <span> <?php echo $date_invoice_due;?></span>
+				<p class="fecha"><?php echo $this->lang->line($row->type.'_date_due')?> <span> <?php echo $date_invoice_due;?></span>
 				</p>
 				</div>
 			</td>
@@ -291,11 +291,11 @@ td.lastRow{
 		<?php } ?>
 			<tr>
 	<td colspan="2" class="lastRow">
-				<h3 class="pago">Pago</h3>
+				<h3 class="pago"><?php echo $this->lang->line('pago')?></h3>
 				<p class="pago">
 					<?php echo ucwords($this->lang->line('clients_to'))?> <span>Jonathan Foucher</span><br>
 					<?php echo $this->lang->line('banco')?> <span>Ibercaja</span><br>
-					<?php echo $this->lang->line('cuenta')?> <span>2085 8016 09 03 302870 22</span><br>
+					<?php echo $this->lang->line('cuenta')?> <span><?php echo $this->lang->line('account_num')?> </span><br>
 <?php if ((($this->settings_model->get_setting('google_merchant_id')) or ($this->settings_model->get_setting('paypal_email'))) and $row->type=='invoice'): ?>
 		<?
 			if ($this->settings_model->get_setting('google_merchant_id'))

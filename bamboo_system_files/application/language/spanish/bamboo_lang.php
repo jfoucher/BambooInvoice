@@ -91,6 +91,7 @@ $lang['invoice_comment_success'] = 'Notas añadidas con exito, puedes verlo deba
 $lang['invoice_contact_add'] = 'No hay contactos disponibles para enviar esta fatura. Para añadir uno, usar el';
 $lang['invoice_date_issued'] = 'Fecha de emisión';
 $lang['invoice_date_due'] = 'Fecha de vencimiento';
+$lang['quote_date_due'] = 'Fecha de vencimiento';
 $lang['invoice_date_issued_full'] = 'Fecha de emisión (en formato YYYY-MM-DD)';
 $lang['invoice_date_paid_full'] = 'Fecha de pago (en formato YYYY-MM-DD)';
 
@@ -279,8 +280,8 @@ $lang['vencimiento'] = 'Vencimiento';
 $lang['days'] = 'días';
 $lang['otra_info'] = 'Otra información';
 $lang['gracias_confianza'] = 'Gracias por su confianza';
-
-
+$lang['account_num'] = '2085 8016 09 03 302870 22';
+$lang['pago']='Pago';
 $lang['invoice_estimate'] = 'Presupuesto';
 $lang['invoice_estimate_details'] = 'Detalles del presupuesto';
 $lang['menu_edit_estimate'] = 'Editar presupuesto';

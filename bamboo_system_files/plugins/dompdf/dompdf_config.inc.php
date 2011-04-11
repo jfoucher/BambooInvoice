@@ -130,7 +130,7 @@ define("DOMPDF_PDF_BACKEND", "auto");
  *
  * @see CPDF_Adapter::PAPER_SIZES for valid sizes
  */
-define("DOMPDF_DEFAULT_PAPER_SIZE", "letter");
+define("DOMPDF_DEFAULT_PAPER_SIZE", "a4");
 
 
 /**
@@ -154,7 +154,10 @@ define("DOMPDF_DEFAULT_FONT", "serif");
  *
  * @var int
  */
-define("DOMPDF_DPI", "150");
+if ($_SERVER['SERVER_NAME']=='phicar.com' || $_SERVER['SERVER_NAME']=='wwwphicar.com')
+	define("DOMPDF_DPI", "150");
+else
+	define("DOMPDF_DPI", "300");
 
 /**
  * Enable inline PHP

@@ -14,8 +14,12 @@ function pdf_create($html, $filename, $stream=TRUE)
 	$dompdf->set_paper("a4", "portrait"); 
 	$dompdf->load_html($html);
 	$dompdf->render();
+	$options=array();
+	$options["Attachment"]=true;
+	$options['Content-Disposition']="test.pdf";
+	$options['Accept-Ranges']=1;
 	if ($stream) {
-		$dompdf->stream($filename.".pdf");
+		$dompdf->stream($filename.".pdf",$options);
 	}
 	write_file("./invoices_temp/$filename.pdf", $dompdf->output());
 }
