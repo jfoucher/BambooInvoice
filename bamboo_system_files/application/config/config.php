@@ -12,7 +12,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 |	http://www.your-site.com/
 |
 */
-$config['base_url']	= 'http://localhost/bambooinvoice/';
+$config['base_url']	= 'http://invoice.6px.eu/';
 // This should be a full address, with a slash.  For example, here's what
 // I use on bambooinvoice.org:
 //$config['base_url']	= 'http://bambooinvoice.org/';
@@ -27,7 +27,7 @@ $config['base_url']	= 'http://localhost/bambooinvoice/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -177,7 +177,7 @@ $config['function_trigger'] = 'm';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 1;
+$config['log_threshold'] = 0;
 
 /*
 |--------------------------------------------------------------------------
@@ -354,10 +354,10 @@ $config['show_client_notes'] = FALSE;
 // in the invoices summary table. Set it to 0 if you do not want this to appear at all.
 $config['short_description_characters'] = 50;
 
-// this controls how dates display throughout BambooInvoice
+// this controls how deates display throughout BambooInvoice
 // 'day_month_year' gives 1 January 2009
 // 'default' gives January 1, 2009
-$config['invoice_date_format'] = 'default';
+$config['invoice_date_format'] = 'day_month_year';
 
 /* End of file config.php */
 /* Location: ./system/application/config/config.php */

@@ -87,13 +87,15 @@ $this->load->view('header');
 			<?php endif;?>
 			<p><?php echo $this->lang->line('invoice_total');?> <?php echo $this->settings_model->get_setting('currency_symbol');?><span id="item_total_amount">0.00</span></p>
 		</div>
-
+	<p><label><input type="radio" name="type" value="estimate" <?=($row->type=='estimate') ? 'checked="checked"' : ''?>/><span><?php echo $this->lang->line('invoice_estimate');?></span></label><br />
+	<label><input type="radio" name="type" value="invoice" <?=($row->type=='invoice') ? 'checked="checked"' : ''?> /><span><?php echo $this->lang->line('invoice_invoice');?></span></label></p>
 		<p>
 			<label><?php echo $this->lang->line('invoice_note');?> <?php echo $this->validation->invoice_note_error; ?><br />
 			<textarea name="invoice_note" id="invoice_note" cols="80" rows="3"><?php echo ($this->validation->invoice_note) ? ($this->validation->invoice_note) : ($row->invoice_note);?></textarea>
 			</label>
 		</p>
 
+		<p><label>Recur in <input type="text" name="recur_interval" size="2" maxlength="11" value="<? echo $row->recur_interval; ?>"> day(s) (leave blank to disable)</label></p>
 		<p>
 			<input type="submit" name="createInvoice" id="createInvoice" value="<?php echo $this->lang->line($button_label);?>" />
 		</p>

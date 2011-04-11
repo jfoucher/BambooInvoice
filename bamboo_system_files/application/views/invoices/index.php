@@ -29,6 +29,9 @@ $this->load->view('invoices/invoice_new');
 			<label for="closed">
 			<input type="radio" name="status" id="closed" value="closed" class="noborder" onclick="getInvoices();" />
 			<?php echo $this->lang->line('invoice_closed');?></label>
+			<label for="estimate">
+			<input type="radio" name="status" id="estimate" value="estimate" class="noborder" onclick="getInvoices();" />
+			<?php echo $this->lang->line('invoice_estimate');?></label>
 
 			<label for="all">
 			<input type="radio" name="status" id="all" value="all" class="noborder" onclick="getInvoices();" />

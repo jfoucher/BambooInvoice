@@ -26,8 +26,8 @@ $lang['clients_cancel_add_contact'] = 'Annuler l\'ajout d\'un contact';
 $lang['clients_city'] = 'Ville';
 $lang['clients_client_has'] = 'Ce client a ';
 $lang['clients_clients_registered'] = 'client(s) inscrit(s)';
-$lang['clients_contact_add'] = 'Incapable d\'ajouter ce contact. Veuillez noter que le prénom, le nom et une adresse de courriel valide sont requis.';
-$lang['clients_contact_delete_fail'] = 'Ne peux effacer ce contact.';
+$lang['clients_contact_add'] = 'Impossible d\'ajouter ce contact. Veuillez noter que le prénom, le nom et une adresse de courriel valide sont requis.';
+$lang['clients_contact_delete_fail'] = 'Impossible d\'effacer ce contact.';
 $lang['clients_contacts'] = 'Contacts';
 $lang['clients_country'] = 'Pays';
 $lang['clients_create_new_client'] = 'Créer un client';
@@ -35,7 +35,7 @@ $lang['clients_created'] = 'Créer un client';
 $lang['clients_delete_all_invoices'] = 'Supprimer le client et toutes ses factures';
 $lang['clients_delete_client'] = 'Supprimer le client';
 $lang['clients_delete_contact'] = 'Supprimer le contact';
-$lang['clients_deleted_error'] = 'Ne peux effacer client';
+$lang['clients_deleted_error'] = 'Impossible d\'effacer client';
 $lang['clients_deleted'] = 'Supprimer le client';
 $lang['clients_edit_client'] = 'Modifier le client';
 $lang['clients_edit_contact'] = 'Modifier le contact';
@@ -47,8 +47,8 @@ $lang['clients_id'] = 'No. Client';
 $lang['clients_last_name'] = 'Nom';
 $lang['clients_name'] = 'Nom du client';
 $lang['clients_notes'] = 'Notes';
-$lang['clients_no_invoice_listed'] = 'Il n\'y a aucun contact présentement énuméré pour';
-$lang['clients_new_contact_fail'] = 'Incapable d\'ajouter ce contact. Veuillez noter que le prénom, le nom et une adresse de courriel valide sont requis.';
+$lang['clients_no_invoice_listed'] = 'Il n\'y a aucun contact pour';
+$lang['clients_new_contact_fail'] = 'Impossible d\'ajouter ce contact. Veuillez noter que le prénom, le nom et une adresse de courriel valide sont requis.';
 $lang['clients_phone'] = 'Téléphone';
 $lang['clients_postal'] = 'Code Postal';
 $lang['clients_province'] = 'Province/État';
@@ -58,7 +58,9 @@ $lang['clients_update_client'] = 'Mettre à jour';
 $lang['clients_website'] = 'Site Internet';
 $lang['clients_you_have'] = 'Vous avez ';
 
-$lang['error_date_fill'] = 'Il semble y avoir une erreur.  Veuillez noter la date doit respecter le format YYYY-MM-DD, et que la somme doit être un nombre. SVP, retournez et ré-essayez.';
+$lang['days'] = 'jours';
+
+$lang['error_date_fill'] = 'Il semble y avoir une erreur.  Veuillez noter lque a date doit respecter le format YYYY-MM-DD, et que la somme doit être un nombre. SVP, retournez et ré-essayez.';
 $lang['error_date_format'] = 'La date doit respecter le format YYYY-MM-DD';
 $lang['error_email_recipients'] = 'Veuillez sélectionner au moins un destinataire pour cet envoi';
 $lang['error_field_required'] = 'Ce champ est requis';
@@ -76,7 +78,10 @@ $lang['invoice_amount'] = 'Somme';
 $lang['invoice_amount_item'] = 'Somme';
 $lang['invoice_amount_error'] = 'Veuillez entrer un montant';
 $lang['invoice_amount_numbers_only'] = 'Nombres seulement';
+$lang['invoice_amount_paid'] = 'Montant réglé';
+$lang['invoice_amount_outstanding'] = 'Montant restant';
 $lang['invoice_bill_to'] = 'Facturé à';
+$lang['invoice_blind_copy_me'] = 'm\'envoyer une copie';
 $lang['invoice_client'] = 'Client';
 $lang['invoice_client_id'] = 'No. client';
 $lang['invoice_closed'] = 'Fermée';
@@ -98,9 +103,9 @@ $lang['invoice_invoice'] = 'Facture';
 $lang['invoice_invoice_delete_success'] = 'Facture supprimée avec succès';
 $lang['invoice_invoice_edit_success'] = 'Facture modifiée avec succès';
 $lang['invoice_is_tax_exempt'] = 'est exempt de taxes';
-$lang['invoice_item'] = 'Item'; // to be translated
+$lang['invoice_item'] = 'Elément'; // to be translated
 $lang['invoice_last_used'] = 'dernier numéro utilisé ';
-$lang['invoice_new_item'] = 'New Item'; // to be translated
+$lang['invoice_new_item'] = 'Nouvel élément'; // to be translated
 $lang['invoice_new_invoice'] = 'Nouvelle facture';
 $lang['invoice_new_invoice_error'] = 'Erreur sur la nouvelle facture';
 $lang['invoice_new_invoice_to'] = 'Nouvelle facture à';
@@ -120,7 +125,7 @@ $lang['invoice_overdue_invoices'] = 'facture(s) en souffrance';
 $lang['invoice_payment_enter'] = 'Entrer un paiement pour';
 $lang['invoice_payment_history'] = 'Historique de paiement';
 $lang['invoice_payment_success'] = 'Paiement entré avec succès.';
-$lang['invoice_payment_term'] = 'Termes';
+$lang['invoice_payment_term'] = 'Echéance';
 $lang['invoice_premenently_delete'] = 'Vous allez <strong class="error">supprimer de façon permanente</strong> cette facture';
 $lang['invoice_problem_creating'] = 'Il y a eu un problème à créer cette facture.';
 $lang['invoice_quantity'] = 'Quantité';
@@ -143,7 +148,7 @@ $lang['invoice_there_are_currently'] = 'Il y a actuellement';
 $lang['invoice_total'] = 'Total';
 $lang['invoice_work_description'] = 'Description du travail';
 $lang['invoice_you_may_now'] = 'Vous pouvez maintenant';
-$lang['invoice_you'] = 'You';
+$lang['invoice_you'] = 'Vous';
 
 $lang['login_allow_login'] = 'Ajouter un nouveau compte administrateur'; 
 $lang['login_caps_lock'] = 'Assurez vous que votre bouton <em>MAJUSCULES</em> n\'est pas enfoncé';
@@ -173,6 +178,7 @@ $lang['login_remember_me'] = 'Souvenez-vous de moi';
 $lang['login_username'] = 'Courriel';
 $lang['login_wrong_password'] = 'Désolé. Cette combinaison pseudonyme/mot de passe ne peut être trouvée ou est erronée. Ré-essayez.';
 
+$lang['menu_accounts'] = 'Comptes';
 $lang['menu_bugs'] = 'Bogues';
 $lang['menu_catchphrase'] = 'Simple,<br />Magnifique,<br />Logiciel libre,<br />Facture en ligne';
 $lang['menu_catchphrase_nobreak'] = 'Simple, Magnifique, Logiciel libre, Facture en ligne';
@@ -199,7 +205,8 @@ $lang['menu_roadmap'] = 'Évolution';
 $lang['menu_root_system'] = 'Racine';
 $lang['menu_see_also'] = 'Voyez aussi';
 $lang['menu_settings'] = 'Paramètres';
-$lang['menu_utilties'] = 'Utilities';
+$lang['menu_utilities'] = 'Utilitaires';
+$lang['months'] = 'mois';
 
 $lang['notice_english_only'] = 'Disponible en anglais seulement'; 
 $lang['notice_generated_by'] = 'Généré par';
@@ -227,7 +234,7 @@ $lang['settings_currency_symbol'] = 'Symbole monétaire';
 $lang['settings_currency_type'] = 'Identification de la devise';
 $lang['settings_days_payment_due'] = 'En souffrance après (en jours)';
 $lang['settings_default_note'] = 'Note par défaut pour les factures';
-$lang['settings_display_branding'] = "Stigmatiser de BambooInvoice d'affichage";
+$lang['settings_display_branding'] = "Afficher le logo de BambooInvoice";
 $lang['settings_logo'] = 'Logo';
 $lang['settings_modify_fail'] = 'Un problème a été rencontré lors de la modification de vos paramètres';
 $lang['settings_modify_success'] = 'Paramètres modifiés avec succès';
@@ -253,13 +260,17 @@ $lang['utilities_connection_failed'] = "La connexion à http://bambooinvoice.org
 $lang['utilities_version_check'] = "Nouvelle version détécté";
 $lang['utilities_version_undetermined'] = "La version n\'a pu être determiné.";
 
+$lang['years'] = 'ans';
+
 $lang['menu_did_you_know_quotes'] = array(
 					"BambooINVOICE est sous licence GPL.",
 					"Vos paramètres peuvent être modifiés à tout moment par le menu &ldquo;Paramètres&rdquo;.",
-					"Les textes d\'aide se complètent chaque jours. Visitez BambooINVOICE.org pour la dernière version!",
+					"Les textes d'aide se complètent chaque jours. Visitez BambooINVOICE.org pour la dernière version!",
 					"Vous pouvez créer un nouveau client par le menu &ldquo;clients&rdquo;, ou immédiatement avant d\'émettre une facture!",
-					"Un seul plan de bamboo établi d\'un réseau racinaire atteint la maturité en seulement un an!",
+					"Un seul plan de bamboo établi d'un réseau racinaire atteint la maturité en seulement un an!",
 					"La longue vie du bamboo &rsquo; en fait le symbole chinois de la longévité... En Inde, un symbole d'amitié."
 					);
+					
+					
 
 ?>

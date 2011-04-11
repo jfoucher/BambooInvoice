@@ -16,8 +16,8 @@ if (floor(phpversion()) < 5)
 | For more info visit:  http://www.php.net/error_reporting
 |
 */
-//	error_reporting(0);
-	error_reporting(E_ALL);
+	error_reporting(0);
+
 
 /*
 |---------------------------------------------------------------
@@ -49,7 +49,7 @@ if (floor(phpversion()) < 5)
 | NO TRAILING SLASH!
 |
 */
-	$application_folder = "application";
+	$application_folder = "bamboo_system_files/application";
 
 
 /*

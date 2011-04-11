@@ -2,7 +2,6 @@
 $this->load->view('header');
 $tax1 = 0;
 $tax2 = 0;
-//testing
 ?>
 <h2><?php echo $this->lang->line('bambooinvoice_logo');?> <?php echo $page_title;?></h2>
 
@@ -107,6 +106,9 @@ if (max($month_tax2) != 0) {
 
 <h3><?php echo $this->lang->line('invoice_open');?></h3>
 <p><?php echo $this->lang->line('invoice_there_are_currently');?> <?php echo $openInvoicesCount;?>. <?php if ($openInvoicesCount > 0):?><?php echo $this->lang->line('invoice_total');?>: <?php echo $this->settings_model->get_setting('currency_symbol');?><?php echo $openInvoicesAmount;?><?php endif; ?></p>
+<h3>Estimates</h3>
+<p><?php echo $this->lang->line('invoice_there_are_currently');?> <?php echo $estimatesCount;?>. <?php if ($estimatesCount > 0):?><?php echo $this->lang->line('invoice_total');?>: <?php echo $this->settings_model->get_setting('currency_symbol');?><?php echo $estimatesAmount;?><?php endif; ?></p>
+
 
 <h3><?php echo $this->lang->line('reports_year_to_date').' : '.$current_year;?></h3>
 <ul>

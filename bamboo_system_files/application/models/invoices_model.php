@@ -174,6 +174,7 @@ class invoices_model extends Model {
 		return $this->_getInvoices(FALSE, FALSE, $status, $days_payment_due, $offset, $limit);
 	}
 
+
 	// --------------------------------------------------------------------
 
 	function getInvoicesAJAX ($status, $client_id, $days_payment_due = 30)
@@ -208,14 +209,21 @@ class invoices_model extends Model {
 		if ($status == 'overdue')
 		{
 			$this->db->having("daysOverdue <= -$days_payment_due AND (ROUND(amount_paid, 2) < ROUND(subtotal, 2) OR amount_paid is null)", '', FALSE);
+			$this->db->where('type','invoice');
 		}
 		elseif ($status == 'open')
 		{
 			$this->db->having("(ROUND(amount_paid, 2) < ROUND(subtotal, 2) or amount_paid is null)", '', FALSE);
+			$this->db->where('type','invoice');
 		}
 		elseif ($status == 'closed')
 		{
 			$this->db->having('ROUND(amount_paid, 2) >= ROUND(subtotal, 2)', '', FALSE);
+			$this->db->where('type','invoice');
+		}
+		elseif ($status == 'estimate')
+		{
+			$this->db->where('type','estimate');
 		}
 
 		$this->db->select('invoices.*, clients.name');
@@ -226,7 +234,7 @@ class invoices_model extends Model {
 		$this->db->join('clients', 'invoices.client_id = clients.id');
 		$this->db->join('invoice_items', 'invoices.id = invoice_items.invoice_id', 'left');
 		$this->db->join('invoice_payments', 'invoices.id = invoice_payments.invoice_id', 'left');
-
+		
 		$this->db->order_by('dateIssued desc, invoice_number desc');
 		$this->db->groupby('invoices.id'); 
 		$this->db->offset($offset);

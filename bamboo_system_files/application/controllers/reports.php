@@ -43,9 +43,11 @@ class Reports extends MY_Controller {
 			($i < 10) ? $monthnum = "0$i" : $monthnum=$i;
 			$data['month_tax1'][$i] = round($this->reports_model->getSummaryData($data['current_year']. "-$monthnum-01", $data['current_year']."-$monthnum-31")->tax1_collected);
 
+
 			// tax2
 			($i < 10) ? $monthnum = "0$i" : $monthnum=$i;
 			$data['month_tax2'][$i] = round($this->reports_model->getSummaryData($data['current_year']. "-$monthnum-01", $data['current_year']."-$monthnum-31")->tax2_collected);
+
 		}
 
 		$days_overdue = $this->settings_model->get_setting('days_payment_due');
@@ -54,9 +56,33 @@ class Reports extends MY_Controller {
 
 		$data['openInvoicesAmount'] = 0;
 		$openInvoices = $this->invoices_model->getInvoices('open', $days_overdue, '', '');
+		$data['estimatesAmount'] = 0;
+		$estimates = $this->invoices_model->getInvoices('estimate', $days_overdue, '', '');
 
 		$data['overdueInvoicesAmount'] = 0;
 		$overdueInvoices = $this->invoices_model->getInvoices('overdue', $days_overdue, '', '');
+		
+		
+		if ($estimates == NULL)
+		{
+			$data['estimatesCount'] = 0;
+		}
+		else
+		{
+
+			$data['estimatesCount'] = $estimates->num_rows();
+			if ($data['estimatesCount'] != 0)
+			{
+				foreach ($estimates->result() as $invoice)
+				{
+					$data['estimatesAmount'] += $invoice->subtotal;
+				}
+			}
+
+			// account for non-period decimal
+			$data['estimatesAmount'] = str_replace('.', $this->config->item('currency_decimal'), $data['estimatesAmount']);
+		}
+
 
 		if ($openInvoices == NULL)
 		{

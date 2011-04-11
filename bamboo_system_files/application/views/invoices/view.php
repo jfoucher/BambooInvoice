@@ -1,5 +1,6 @@
 <?php
-$this->load->view('header');
+$this->load->view('header');
+
 if ($message != ''):
 ?>
 <p class="error"><?php echo $message;?></p>
@@ -103,7 +104,8 @@ if ($row->amount_paid < $row->total_with_tax):
 				</p>
 
 			</div>
-			<?php endif; ?>
+			<?php endif; ?>
+
 	<?php echo form_close();?>
 
 <div class="invoiceViewHold">
@@ -165,7 +167,7 @@ if ($row->amount_paid < $row->total_with_tax):
 		<?php foreach ($items->result() as $item):?>
 		<tr>
 			<td><p><?php echo str_replace('.00', '', $item->quantity);?><?=($item->quantity==1) ? '' : ' h'?></p></td>
-			<td><?php echo auto_typography($item->work_description);?></td>
+			<td><?php echo auto_format(auto_typography($item->work_description),$row);?></td>
 			<td><p><?php echo $this->settings_model->get_setting('currency_symbol') . str_replace('.', $this->config->item('currency_decimal'), $item->amount);?> <?php if ($item->taxable == 0){echo '(' . $this->lang->line('invoice_not_taxable') . ')';}?></p></td>
 			<td><p><?php echo $this->settings_model->get_setting('currency_symbol') . number_format($item->quantity * $item->amount, 2, $this->config->item('currency_decimal'), '');?></p></td>
 		</tr>

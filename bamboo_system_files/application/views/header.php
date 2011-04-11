@@ -151,6 +151,7 @@ lang_amount = new String("<?php echo ($this->lang->line('invoice_amount'));?>");
 			<li><?php echo anchor('invoices', $this->lang->line('invoice_summary'));?></li>
 			<li><?php echo anchor('invoices/overdue', $this->lang->line('invoice_overdue'));?></li>
 			<li><?php echo anchor('invoices/open', $this->lang->line('invoice_open'));?></li>
+			<li><?php echo anchor('invoices/estimates', $this->lang->line('invoice_estimate'));?></li>
 			<li><?php echo anchor('invoices/closed', $this->lang->line('invoice_closed'));?></li>
 			<li><?php echo anchor('invoices/all', $this->lang->line('invoice_all_invoices'));?></li>
 		</ul>

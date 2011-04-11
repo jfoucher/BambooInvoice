@@ -3,6 +3,7 @@
 * This page gnerates the divs that slide into position when
 * the user creates a new invoice
 */
+
 ?>
 <div id="newinvoice" style="display:block;">
 

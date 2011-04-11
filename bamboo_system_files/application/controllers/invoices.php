@@ -612,26 +612,30 @@ class Invoices extends MY_Controller {
 
 		$data['items'] = $items;
 		$data['total_no_tax'] = $this->lang->line('invoice_amount').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_notax, 2, $this->config->item('currency_decimal'), '')."<br />\n";
-
+		$data['no_tax_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_notax, 2, $this->config->item('currency_decimal'), '');
 		// taxes
 		$data['tax_info'] = $this->_tax_info($data['row']);
-
+		$data['tax_data']=$this->_tax_value($data['row']);
 		$data['total_with_tax'] = $this->lang->line('invoice_total').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax, 2, $this->config->item('currency_decimal'), '')."<br />\n";;
-
+		$data['with_tax_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax, 2, $this->config->item('currency_decimal'), '');
 		if ($data['row']->amount_paid > 0)
 		{
 			$data['total_paid'] = $this->lang->line('invoice_amount_paid').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '')."<br />\n";;
+			$data['paid_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
 			$data['total_outstanding'] = $this->lang->line('invoice_amount_outstanding').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax - $data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
+			$data['outstanding_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax - $data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
 		}
 		else
 		{
 			$data['total_paid'] = '';
 			$data['total_outstanding'] = '';
+			$data['outstanding_amount']='';
+			$data['paid_amount']='';
 		}
 
 		// create and save invoice to temp
 		$html = $this->load->view('invoices/pdf', $data, TRUE);
-		$invoice_localized = url_title(strtolower($this->lang->line('invoice_invoice')));
+		$invoice_localized = url_title(strtolower($this->lang->line('invoice_'.$data['row']->type)));
 
 		if (pdf_create($html, $invoice_localized.'_'.$data['row']->invoice_number, FALSE))
 		{
@@ -670,10 +674,12 @@ class Invoices extends MY_Controller {
 		if (count($recipient_emails) === 1)
 		{
 			$this->email->to($recipient_emails[0]);
+			//$this->email->to('jfoucher@6px.eu');
 		}
 		else
 		{
 			$this->email->to($recipient_emails[0]);
+			//$this->email->to('jfoucher@6px.eu');
 			$this->email->cc(array_slice($recipient_emails, 1));
 		}
 
@@ -686,7 +692,7 @@ class Invoices extends MY_Controller {
 		$email_body = $this->input->post('email_body');
 
 		$this->email->from($data['companyInfo']->primary_contact_email, $data['companyInfo']->primary_contact);
-		$this->email->subject($this->lang->line('invoice_invoice')." $invoice_number : ".$data['companyInfo']->company_name);
+		$this->email->subject($this->lang->line('invoice_'.$data['row']->type)." $invoice_number : ".$data['companyInfo']->company_name);
 		$this->email->message(stripslashes($email_body));
 		$this->email->attach("./invoices_temp/".$invoice_localized."_"."$invoice_number.pdf");
 
@@ -754,29 +760,31 @@ class Invoices extends MY_Controller {
 		$data['items'] = $this->invoices_model->getInvoiceItems($id);
 
 		$data['total_no_tax'] = $this->lang->line('invoice_amount').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_notax, 2, $this->config->item('currency_decimal'), '')."<br />\n";
-$data['no_tax_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_notax, 2, $this->config->item('currency_decimal'), '');
+		$data['no_tax_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_notax, 2, $this->config->item('currency_decimal'), '');
 		// taxes
 		$data['tax_info'] = $this->_tax_info($data['row']);
 		$data['tax_data']=$this->_tax_value($data['row']);
 		$data['total_with_tax'] = $this->lang->line('invoice_total').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax, 2, $this->config->item('currency_decimal'), '')."<br />\n";;
-$data['with_tax_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax, 2, $this->config->item('currency_decimal'), '');
+		$data['with_tax_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax, 2, $this->config->item('currency_decimal'), '');
 		if ($data['row']->amount_paid > 0)
 		{
 			$data['total_paid'] = $this->lang->line('invoice_amount_paid').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '')."<br />\n";;
 			$data['paid_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
 			$data['total_outstanding'] = $this->lang->line('invoice_amount_outstanding').': '.$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax - $data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
 			$data['outstanding_amount']=$this->settings_model->get_setting('currency_symbol').number_format($data['row']->total_with_tax - $data['row']->amount_paid, 2, $this->config->item('currency_decimal'), '');
-		}
+		    $data['paypal_amount']=1.029*($data['row']->total_with_tax - $data['row']->amount_paid)+0.3;
+        }
 		else
 		{
 			$data['total_paid'] = '';
 			$data['total_outstanding'] = '';
 			$data['outstanding_amount']='';
 			$data['paid_amount']='';
+            $data['paypal_amount']=1.029*$data['row']->total_with_tax+0.3;
 		}
 
 		$html = $this->load->view('invoices/pdf', $data, TRUE);
-		$invoice_localized = url_title(strtolower($this->lang->line('invoice_invoice')));
+		$invoice_localized = url_title(strtolower($this->lang->line('invoice_'.$data['row']->type)));
 		//echo $html;
 
 		if (pdf_create($html, $invoice_localized.'_'.$data['row']->invoice_number, $output))

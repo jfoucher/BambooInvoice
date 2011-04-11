@@ -77,7 +77,7 @@ $lang['invoice_add_note'] = 'Añadir notas';
 $lang['invoice_all_clients'] = 'Todos los clientes';
 $lang['invoice_all_invoices'] = 'Todas las facturas';
 $lang['invoice_amount'] = 'Cantidad';
-$lang['invoice_amount_item'] = 'Cantidad';
+$lang['invoice_amount_item'] = 'Precio';
 $lang['invoice_amount_error'] = 'Ingresar la cantidad';
 $lang['invoice_amount_numbers_only'] = 'Introducir sólo números';
 $lang['invoice_amount_paid'] = 'Cantidad pagada';
@@ -90,8 +90,10 @@ $lang['invoice_comment'] = 'Comentario';
 $lang['invoice_comment_success'] = 'Notas añadidas con exito, puedes verlo debajo.'; 
 $lang['invoice_contact_add'] = 'No hay contactos disponibles para enviar esta fatura. Para añadir uno, usar el';
 $lang['invoice_date_issued'] = 'Fecha de emisión';
+$lang['invoice_date_due'] = 'Fecha de vencimiento';
 $lang['invoice_date_issued_full'] = 'Fecha de emisión (en formato YYYY-MM-DD)';
 $lang['invoice_date_paid_full'] = 'Fecha de pago (en formato YYYY-MM-DD)';
+
 $lang['invoice_email_demo'] = 'Nota: para evitar abuso de esta demo los mensajes <em>no</em> son enviados. Para ver una copia del PDF adjunto elegir &ldquo;generar factura&rdquo; en el menú.';
 $lang['invoice_email_invoice_to'] = 'Enviar factura a';
 $lang['invoice_email_message'] = 'Enviar mensaje';
@@ -101,13 +103,14 @@ $lang['invoice_export_to'] = 'Exportar datos de factura a';
 $lang['invoice_generated_by'] = 'Factura generada por';
 $lang['invoice_history_comments'] = 'Historial y comentarios de factura';
 $lang['invoice_invoice'] = 'Factura';
-$lang['invoice_blind_copy_me'] = 'blind copy me on this email'; // TO BE TRANSLATED
+
+$lang['invoice_blind_copy_me'] = 'Enviarme una copia en destinario oculto';
 $lang['invoice_invoice_delete_success'] = 'Se ha eliminado la factura con éxito';
 $lang['invoice_invoice_edit_success'] = 'Se ha editado la factura con éxito';
 $lang['invoice_is_tax_exempt'] = 'is tax exempt';
-$lang['invoice_item'] = 'Item'; // to be translated
+$lang['invoice_item'] = 'Elemento';
 $lang['invoice_last_used'] = 'último número en uso ';
-$lang['invoice_new_item'] = 'New Item'; // to be translated
+$lang['invoice_new_item'] = 'Nuevo elemento';
 $lang['invoice_new_invoice'] = 'Factura nueva';
 $lang['invoice_new_invoice_error'] = 'Error en la factura nueva';
 $lang['invoice_new_invoice_to'] = 'Nueva factura para';
@@ -188,7 +191,7 @@ $lang['menu_changelog'] = 'Cambiar Log';
 $lang['menu_clients'] = 'Clientes';
 $lang['menu_credits'] = 'Créditos';
 $lang['menu_delete_invoice'] = 'Eliminar factura';
-$lang['menu_duplicate_invoice'] = 'Duplicate Invoice'; // TO BE TRANSLATED
+$lang['menu_duplicate_invoice'] = 'Duplicar factura';
 $lang['menu_did_you_know'] = 'Sabías que?';
 $lang['menu_edit_invoice'] = 'Editar factura';
 $lang['menu_email_invoice'] = 'Enviar factura';
@@ -207,7 +210,7 @@ $lang['menu_roadmap'] = 'Hoja de ruta';
 $lang['menu_root_system'] = 'Inicio del sistema';
 $lang['menu_see_also'] = 'Ver también';
 $lang['menu_settings'] = 'Configuración';
-$lang['menu_utilties'] = 'Utilidades';
+$lang['menu_utilities'] = 'Utilidades';
 
 $lang['notice_english_only'] = 'Available in English Only'; // to be translated
 $lang['notice_generated_by'] = 'Generado por';
@@ -261,7 +264,26 @@ $lang['utilities_up_to_date'] = "Estas usando la versión mas reciente de Bamboo
 $lang['utilities_connection_failed'] = "La conexión con http://bambooinvoice.org no ha podido ser realizada."; 
 $lang['utilities_version_check'] = "Buscar nueva versión"; 
 $lang['utilities_version_undetermined'] = "El estado de la versión no puede ser determinado."; 
+/*
+Ajoute par jonathan Foucher
+*/
+$lang['account'] = 'Cuenta';
+$lang['banco'] = 'Banco';
+$lang['incluye_gastos_paypal']='incluye gastos paypal';
+$lang['condiciones']='Condiciones';
+$lang['invoice_invoice_details'] = 'Detalles de factura';
+$lang['antes']='Antes de empezar';
+$lang['entrega'] = 'A la entrega';
+$lang['intereses_mora']='Intereses de mora';
+$lang['vencimiento'] = 'Vencimiento';
+$lang['days'] = 'días';
+$lang['otra_info'] = 'Otra información';
+$lang['gracias_confianza'] = 'Gracias por su confianza';
 
+
+$lang['invoice_estimate'] = 'Presupuesto';
+$lang['invoice_estimate_details'] = 'Detalles del presupuesto';
+$lang['menu_edit_estimate'] = 'Editar presupuesto';
 $lang['menu_did_you_know_quotes'] = array(
 					"BambooINVOICE es distribuido bajo licencia GPL.",
 					"Tu configuración puede ser cambiada en cualquier momento usando el menú &ldquo;Configuración&rdquo;.",
@@ -269,5 +291,8 @@ $lang['menu_did_you_know_quotes'] = array(
 					"Puedes crear un cliente nuevo usando el menu &ldquo;clientes&rdquo; o tambien justo antes de emitir una nueva factura!",
 					"Un simple gajo de bambu de un sistema de raiz establecida puede llegar a una altura total en solo un año!",
 					"La larga vida del bambo hace que sea el simbolo chino de una vida larga. En India es el simbolo de la amistad."
+					
+					
+					
 					);
 ?>
