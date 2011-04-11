@@ -227,8 +227,8 @@ td.lastRow{
 			<td>
 			<div class="facturaWrap">
 				<p class="factura">
-						<?php echo strtoupper($this->lang->line('invoice_'.$row->type));?> <span><?php echo substr($date_invoice_issued,-2);?>
-                    <?php echo ($row->invoice_number<10) ? "0".$row->invoice_number : $row->invoice_number;?></span>
+						<?php echo strtoupper($this->lang->line('invoice_'.$row->type));?> <span>
+                    <?php echo substr($date_invoice_issued,-2);?><?php echo ($row->invoice_number<10) ? "0".$row->invoice_number : $row->invoice_number;?></span>
 				</p>
 				<p class="fecha"><?php echo $this->lang->line('invoice_date_issued')?>  <span> <?php echo $date_invoice_issued;?></span>
 				</p>

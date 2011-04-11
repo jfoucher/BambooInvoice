@@ -91,7 +91,7 @@ $lang['invoice_comment_success'] = 'Notas añadidas con exito, puedes verlo deba
 $lang['invoice_contact_add'] = 'No hay contactos disponibles para enviar esta fatura. Para añadir uno, usar el';
 $lang['invoice_date_issued'] = 'Fecha de emisión';
 $lang['invoice_date_due'] = 'Fecha de vencimiento';
-$lang['quote_date_due'] = 'Fecha de vencimiento';
+$lang['estimate_date_due'] = 'Fecha de vencimiento';
 $lang['invoice_date_issued_full'] = 'Fecha de emisión (en formato YYYY-MM-DD)';
 $lang['invoice_date_paid_full'] = 'Fecha de pago (en formato YYYY-MM-DD)';
 

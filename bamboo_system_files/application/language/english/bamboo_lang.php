@@ -94,7 +94,7 @@ $lang['invoice_comment_success'] = 'Note successfully added, you can review belo
 $lang['invoice_contact_add'] = 'There are no contacts available to send this invoice to. To add, please use the';
 $lang['invoice_date_issued'] = 'Date Issued';
 $lang['invoice_date_due'] = 'Date Due';
-$lang['quote_date_due'] = 'Valid until';
+$lang['estimate_date_due'] = 'Valid until';
 $lang['invoice_date_issued_full'] = 'Date Issued (in format YYYY-MM-DD)';
 $lang['invoice_date_paid_full'] = 'Date Paid (in format YYYY-MM-DD)';
 $lang['invoice_email_demo'] = 'Please note that to prevent abuse of this demo, email is <em>not</em> sent. To see a copy of the PDF attachment, select &ldquo;generate invoice&rdquo; from the menu.';
@@ -282,7 +282,7 @@ $lang['menu_did_you_know_quotes'] = array(
 
 
 
-$lang['account'] = 'Account (IBAN)';
+$lang['cuenta'] = 'Account (IBAN)';
 $lang['account_num'] = 'ES98 2085 8016 0903 3028 7022';
 $lang['incluye_gastos_paypal']='includes paypal commission';
 $lang['banco'] = 'Bank';
